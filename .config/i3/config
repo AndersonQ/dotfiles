@@ -197,7 +197,8 @@ set $ws6 6
 set $ws7 7
 set $ws8 8
 
-exec --no-startup-id xrandr --output eDP-1 --mode 1920x1200 --pos 0x0 --rotate normal --primary --output DP-1 --off --output DP-2 --off --output DP-3 --mode 3840x2160 --pos -960x-2160 --rotate normal
+# exec --no-startup-id xrandr --output eDP-1 --mode 1920x1200 --pos 0x0 --rotate normal --primary --output DP-1 --off --output DP-2 --off --output DP-3 --mode 3840x2160 --pos -960x-2160 --rotate normal
+exec --no-startup-idxrandr --output eDP-1 --mode 1920x1200 --pos 960x1620 --rotate normal --primary --output DP-3 --mode 3840x2160 --rotate normal --scale 0.75x0.75 --output DP-1 --off --output DP-2 --off
 
 set $primaryScreen eDP-1
 set $secondScreen DP-3
