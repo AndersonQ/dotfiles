@@ -43,7 +43,7 @@ exec --no-startup-id /usr/lib/xfce4/notifyd/xfce4-notifyd
 # bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
 
 # Sound
-exec --no-startup-id volumeicon
+exec --no-startup-id pa-applet
 bindsym $mod+Ctrl+m exec pavucontrol
 
 # Bluethooth control
@@ -65,15 +65,15 @@ bindsym Control+q kill
 bindsym $mod+d exec --no-startup-id dmenu_run
 bindsym Control+space exec --no-startup-id dmenu_run
 
-# launch categorized menu
-bindsym $mod+z exec --no-startup-id morc_menu
+# disable windows transparency
+bindsym $mod+o exec --no-startup-id picom-trans -c -o 100
 
 # Lock screen
 #bindsym $mod+9 exec --no-startup-id blurlock
 bindsym Control+Shift+L exec --no-startup-id i3lock -c 000000
 
 # Suspend
-bindsym $mod+Shift+s exec --no-startup-id i3lock -c 000000 && systemctl suspend
+bindsym $mod+Shift+s exec --no-startup-id systemctl suspend && i3lock -c 000000
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -105,15 +105,15 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 
 # Use Mouse+$mod to drag floating windows
-floating_modifier $mod
+floating_modifier Control
 
 # Screen brightness controls - NOT WORKING
 # bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
 # bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
 
 bindsym Print exec --no-startup-id i3-scrot
-bindsym $mod+Print --release exec --no-startup-id i3-scrot -w
-bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
+bindsym $mod+Print --release exec --no-startup-id xfce4-screenshooter
+bindsym $mod+Shift+Print --release exec --no-startup-id xfce4-screenshooter
 
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 
@@ -197,36 +197,36 @@ set $ws6 6
 set $ws7 7
 set $ws8 8
 
-# exec --no-startup-id xrandr --output eDP-1 --mode 1920x1200 --pos 0x0 --rotate normal --primary --output DP-1 --off --output DP-2 --off --output DP-3 --mode 3840x2160 --pos -960x-2160 --rotate normal
-exec --no-startup-idxrandr --output eDP-1 --mode 1920x1200 --pos 960x1620 --rotate normal --primary --output DP-3 --mode 3840x2160 --rotate normal --scale 0.75x0.75 --output DP-1 --off --output DP-2 --off
+#exec --no-startup-id xrandr --output eDP-1 --mode 1920x1080 --rotate normal --primary --output DP-1-1 --right-of eDP-1 --mode 3840x2160 --rotate normal --scale 0.75x0.75
+exec --no-startup-id /home/ainsoph/.screenlayout/home.sh
 
 set $primaryScreen eDP-1
-set $secondScreen DP-3
+set $secondScreen DP-1-0
 
 # Attach workspaces to outputs
-workspace 1 output $primaryScreen
-workspace 2 output $primaryScreen
-workspace 3 output $primaryScreen
-workspace 4 output $primaryScreen
-workspace 5 output $primaryScreen
-workspace 6 output $primaryScreen
-workspace 7 output $primaryScreen
-workspace 8 output $primaryScreen
-workspace 9 output $primaryScreen
-workspace 10 output $primaryScreen
+workspace 1 output $secondScreen
+workspace 2 output $secondScreen
+workspace 3 output $secondScreen
+workspace 4 output $secondScreen
+workspace 5 output $secondScreen
+workspace 6 output $secondScreen
+workspace 7 output $secondScreen
+workspace 8 output $secondScreen
+workspace 9 output $secondScreen
+workspace 10 output $secondScreen
 
-workspace 11 output $secondScreen
-workspace 12 output $secondScreen
-workspace 13 output $secondScreen
-workspace 14 output $secondScreen
-workspace 15 output $secondScreen
-workspace 16 output $secondScreen
-workspace 17 output $secondScreen
-workspace 18 output $secondScreen
-workspace 19 output $secondScreen
-workspace 20 output $secondScreen
-workspace 21 output $secondScreen
-workspace 22 output $secondScreen
+workspace 11 output $primaryScreen
+workspace 12 output $primaryScreen
+workspace 13 output $primaryScreen
+workspace 14 output $primaryScreen
+workspace 15 output $primaryScreen
+workspace 16 output $primaryScreen
+workspace 17 output $primaryScreen
+workspace 18 output $primaryScreen
+workspace 19 output $primaryScreen
+workspace 20 output $primaryScreen
+workspace 21 output $primaryScreen
+workspace 22 output $primaryScreen
 
 # # switch to workspace
 bindsym $mod+1 workspace 1
@@ -279,7 +279,10 @@ bindsym $mod+Shift+F11 move container to workspace 21
 bindsym $mod+Shift+F12 move container to workspace 22
 
 
-# Open specific applications in floating mode
+################################################################################################
+### Open specific applications in floating mode:
+################################################################################################
+
 for_window [title="alsamixer"] floating enable border pixel 1
 for_window [class="calamares"] floating enable border normal
 for_window [class="Clipgrab"] floating enable
@@ -306,6 +309,8 @@ for_window [class="Skype"] floating enable border normal
 for_window [class="Timeset-gui"] floating enable border normal
 for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Xfburn"] floating enable
+for_window [class="zoom"] floating enable
+
 
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus
@@ -465,6 +470,9 @@ mode "$mode_gaps_outer" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
+
+# caps is ctl, swap alt and meta
+exec --no-startup-idxrandr setxkbmap -model pc105 -layout us -variant intl -option ctrl:nocaps -option altwin:swap_lalt_lwin
 
 # Set background. For some reason it cannot be at the beguinning of the file
 exec --no-startup-id feh --bg-scale /home/ainsoph/Pictures/DragonBall.jpg
