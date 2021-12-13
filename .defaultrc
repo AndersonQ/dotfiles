@@ -1,6 +1,8 @@
 export GOPATH=$HOME/devel/go
-export GOROOT=/home/ainsoph/devel/goroot
-export PATH=$PATH:$GOROOT/bin:/home/ainsoph/devel/bin
+export GOROOT=/usr/lib/go
+export GOBIN=$GOPATH/bin
+#export GOROOT=/home/ainsoph/devel/goroot
+export PATH=$PATH:$GOBIN:/home/ainsoph/devel/bin
 
 export GITHUB_TOKEN=TODO_SET_GITHUB_TOKEN
 export GITURL=https://$GITHUB_TOKEN@github.com
@@ -10,3 +12,5 @@ alias devel='cd /home/ainsoph/devel'
 alias andersonq='cd /home/ainsoph/devel/github.com/AndersonQ'
 alias elastic='cd /home/ainsoph/devel/github.com/elastic'
 alias dotgit='/usr/bin/git --git-dir=$HOME/.dotfiles.git --work-tree=$HOME'
+alias epath='export GOPATH=$HOME/devel/go/elastic'
+alias epathd'export GOPATH=$HOME/devel/go'
