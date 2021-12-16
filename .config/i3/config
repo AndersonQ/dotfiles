@@ -57,7 +57,6 @@ bindsym Control+Return exec terminator
 bindsym Control+q kill
 
 # start program launcher
-bindsym $mod+d exec --no-startup-id dmenu_run
 bindsym Control+space exec --no-startup-id dmenu_run
 
 # disable windows transparency
@@ -475,3 +474,9 @@ exec --no-startup-idxrandr setxkbmap -model pc105 -layout us,us -variant ,intl -
 
 # Set background. For some reason it cannot be at the beguinning of the file
 exec --no-startup-id feh --bg-scale /home/ainsoph/Pictures/DragonBall.jpg
+
+# set screen saver activation after a period of user inactivity
+exec --no-startup-id xset s 300
+
+# lock on suspend/hibernate and screen saver activation
+exec --no-startup-id xss-lock --transfer-sleep-lock -- /home/ainsoph/devel/bin/transfer-sleep-lock-i3lock.sh &
