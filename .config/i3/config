@@ -8,16 +8,11 @@ set $mod Mod4
 # workspace_layout tabbed <stacking|tabbed>
 
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
-default_border pixel 1
+default_border pixel 3
 default_floating_border normal
 
 # Hide borders
 hide_edge_borders none
-
-# change borders
-bindsym $mod+u border none
-bindsym $mod+y border pixel 1
-bindsym $mod+n border normal
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -72,8 +67,13 @@ bindsym $mod+o exec --no-startup-id picom-trans -c -o 100
 #bindsym $mod+9 exec --no-startup-id blurlock
 bindsym Control+Shift+L exec --no-startup-id i3lock -c 000000
 
-# Suspend
-bindsym $mod+Shift+s exec --no-startup-id systemctl suspend && i3lock -c 000000
+# Suspend - screen lock is hadled by xss-lock
+bindsym $mod+Shift+s exec --no-startup-id systemctl suspend
+
+# change borders
+# bindsym $mod+u border none
+# bindsym $mod+y border pixel 1
+# bindsym $mod+n border normal
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -111,9 +111,8 @@ floating_modifier Control
 # bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
 # bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
 
-bindsym Print exec --no-startup-id i3-scrot
+bindsym Print exec --no-startup-id xfce4-screenshooter
 bindsym $mod+Print --release exec --no-startup-id xfce4-screenshooter
-bindsym $mod+Shift+Print --release exec --no-startup-id xfce4-screenshooter
 
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 
@@ -299,7 +298,6 @@ for_window [class="Nitrogen"] floating enable sticky enable border normal
 for_window [class="Oblogout"] fullscreen enable
 for_window [class="octopi"] floating enable
 for_window [title="About Pale Moon"] floating enable
-for_window [class="Pamac-manager"] floating enable
 for_window [class="Pavucontrol"] floating enable
 for_window [class="qt5ct"] floating enable sticky enable border normal
 for_window [class="Qtconfig-qt4"] floating enable sticky enable border normal
@@ -310,7 +308,6 @@ for_window [class="Timeset-gui"] floating enable border normal
 for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Xfburn"] floating enable
 
-for_window [class="zoom"] floating enable
 for_window [class="keepassxc"] floating enable
 for_window [class="KeePassXC"] floating enable
 
@@ -473,8 +470,8 @@ mode "$mode_gaps_outer" {
         bindsym Escape mode "default"
 }
 
-# caps is ctl, swap alt and meta
-exec --no-startup-idxrandr setxkbmap -model pc105 -layout us -variant intl -option ctrl:nocaps -option altwin:swap_lalt_lwin
+# caps is ctl, swap alt and meta, seitch between intl and us-only with Win+Space
+exec --no-startup-idxrandr setxkbmap -model pc105 -layout us,us -variant ,intl -option grp:win_space_toggle -option ctrl:nocaps -option altwin:swap_lalt_lwin
 
 # Set background. For some reason it cannot be at the beguinning of the file
 exec --no-startup-id feh --bg-scale /home/ainsoph/Pictures/DragonBall.jpg
