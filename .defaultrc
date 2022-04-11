@@ -8,9 +8,14 @@ export GITHUB_TOKEN=TODO_SET_GITHUB_TOKEN
 export GITURL=https://$GITHUB_TOKEN@github.com
 
 alias cls='clear && echo "\t\t\t\t\t\t\t\tWellcome to the Matrix Anderson" && cal'
+
 alias devel='cd /home/ainsoph/devel'
 alias andersonq='cd /home/ainsoph/devel/github.com/AndersonQ'
 alias elastic='cd /home/ainsoph/devel/github.com/elastic'
+alias agent='cd /home/ainsoph/devel/github.com/elastic/elastic-agent'
+alias vms='cd /home/ainsoph/devel/vms'
+alias sdhs='cd /home/ainsoph/devel/sdhs'
 alias dotgit='/usr/bin/git --git-dir=$HOME/.dotfiles.git --work-tree=$HOME'
-alias epath='export GOPATH=$HOME/devel/go/elastic'
-alias epathd'export GOPATH=$HOME/devel/go'
+
+eval "$(elastic-package stack shellinit)"
+source /home/ainsoph/.elastic-package.completion
